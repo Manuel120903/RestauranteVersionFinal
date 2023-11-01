@@ -8,8 +8,13 @@
         <th scope="col">Tipo</th>
         <th scope="col">Descripción</th>
         <th scope="col">Imagen</th>        
-        <th scope="col">Editar</th>
-        <th scope="col">Borrar</th>
+        
+        @auth
+           @if (Auth::user()->category=='ADMIN')
+           <th scope="col">Borrar</th>   
+           <th scope="col">Editar</th>        
+           @endif
+       @endauth
       </tr>
     </thead>
     <tbody> 
@@ -23,8 +28,15 @@
        <th>{{$food->description}}</th>
        
        <td> <img src="{{ asset ('storage/'.$food->img1) }}" alt="{{$food->img1}}" width="50px" ></td>
-       <td><a href="/admin/foods/{{$food->id}}/edit"><Em>EDITAR</Em></a></td>
-       <td><a href="/admin/foods/{{$food->id}}"><Em>BORRAR</Em></a></td>
+       
+       @auth
+       
+           @if (Auth::user()->category=='ADMIN')
+           <td><a href="/admin/foods/{{$food->id}}/edit"><Em>EDITAR</Em></a></td>
+           <td><a href="/admin/foods/{{$food->id}}"><Em>BORRAR</Em></a></td>
+           @endif
+       @endauth
+      
       </tr>
       @endforeach
       

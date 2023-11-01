@@ -9,13 +9,18 @@
         <th scope="col">Categoria</th>
         <th scope="col">Ruta</th>
         <th scope="col">Imagen</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Borrar</th>
+
+        @auth
+           @if (Auth::user()->category=='ADMIN')
+           <th scope="col">Borrar</th>   
+           <th scope="col">Editar</th>        
+           @endif
+       @endauth
 
       </tr>
     </thead>
     <tbody>
-      @foreach ($users as $user)
+      @foreach ($user as $user)
         
     
       <tr>
@@ -25,8 +30,20 @@
        <th>{{$user->category}}</th>
        <th>{{$user->image}}</th>
        <td> <img src="{{ asset ('storage/'.$user->image) }}" alt="{{$user->image}}" width="200px"></td>
+
+       @auth
+       @if (Auth::user()->category=='ADMIN')
        <td><a href="/admin/users/{{$user->id}}/edit"><Em>EDITAR</Em></a></td>
        <td><a href="/admin/users/{{$user->id}}"><Em>BORRAR</Em></a></td>
+       @endif
+       @endauth
+
+
+
+
+
+
+
       </tr>
       @endforeach
     </tbody>

@@ -57,8 +57,6 @@ class FoodController extends Controller
             $path = $file->storeAs('Imagenes',$new_name, 'public');
             $ps->img1=$path;
             $ps->save();    
-
-
         }
 
         return redirect()->route('foods.index');

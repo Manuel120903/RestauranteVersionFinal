@@ -66,7 +66,7 @@ Route::get('/public/api/menuDetalle/{id}', function ($id) {
     $response=Http::get('http://fakestoreapi.com/products/'.$id);
     $body=$response->body();
     $item=json_decode($body);
-    //dd ($array)sss;
+    //dd ($array);
     return view('menu.detalle_menu_api')->with('producto',$item);
 })->name('api.menuDetalle');
 

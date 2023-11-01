@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-      dd($request);
+      //dd($request);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
@@ -41,23 +41,34 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'category' => $request->category,
-            'image'=>$request->image,
-            'status' => $request->status,
-            'password' => Hash::make($request->password),
-        ]);
+            //  $user = User::create([
+            //      'name' => $request->name,
+            //    'email' => $request->email,
+            //      'category' => $request->category,
+            //      'image'=>$request->image,
+            //    'status' => $request->status,
+            //     'password' => Hash::make($request->password),
+            //  ]);
 
         $user = new User();
-         $user->name=$request->name;  
-         $user->email=$request->email;
-         $user->category=$request->category;
-         $user->status=$request->status;
-         $user->password=Hash::make($request->password);
-        
-         $user->save();
+       $user->name=$request->name;  
+       $user->email=$request->email;
+       $user->category=$request->category;
+       $user->image='Imagenes/user/default.jpg';
+       $user->status=$request->status;
+       $user->password=Hash::make($request->password);
+      
+       $user->save();
+
+       if($request->hasFile("image")){
+        $file = $request->image;
+        $extension=$file->extension();
+        $new_name="user_".$user->id."_1.".$extension;
+        $path = $file->storeAs('Imagenes/user',$new_name, 'public');
+        $user->image=$path;
+        $user->save();    
+    }
+
 
         event(new Registered($user));
 

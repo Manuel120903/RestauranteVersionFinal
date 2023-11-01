@@ -42,7 +42,19 @@
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+  <a class="navbar-brand col-md- col-lg-2 me-0 px-3" href="">
+    <img src="/storage/{{ Auth::user()->image }}"  alt="{{ Auth::user()->name }}" width="75px">
+    {{ Auth::user()->category }}
+  </a>
+
+  @if (Route::has('register'))
+      <a href="/profile" class="navbar-brand col-md- col-lg-3 me-0 px-5" > Editar Perfil</a>
+  @endif
+
+  <a href="{{ route('register') }}" class="navbar-brand col-md- col-lg-3 me-0 px-5" > Registrar Usuario</a>
+
+
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
       <a class="nav-link px-3" href="/log out">Cerrar Sesion</a>

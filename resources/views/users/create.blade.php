@@ -58,6 +58,7 @@
       <label for="validationDefault04" class="form-label">Ingrese una categoria</label>
       <select name="category" class="form-select" id="validationDefault04" required>
         <option selected disabled value="">Escoje...</option>
+        <option>ADMIN</option>
         <option>Cocinero</option>
         <option>Mesero</option>
         <option>Caja</option>
