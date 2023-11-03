@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         //return view('users.index');   
 
-        return view('/users/index')->with('user', user::where('status', '1')->get());
+        return view('/users/index')->with('user', user::where('status', 'ACTIVO')->get());
     }
 
     /**
